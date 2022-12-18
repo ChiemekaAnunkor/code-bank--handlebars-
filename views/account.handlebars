@@ -1,0 +1,75 @@
+{{#each users as |user|}}
+<div class="card" style="width: 40rem;">
+  <div class="card-header">
+    Account Overview
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">User Name: {{user.username}}</li>
+    <li class="list-group-item">Email: {{user.email}}</li>
+    <li class="list-group-item">Date of Birth: {{user.dateOfBirth}}</li>
+  </ul>
+</div>
+{{/each}}
+
+{{!-- Checking and Savings cards --}}
+<div class="flex-row flex-row-md mt-1 mb-1">
+  <div class="account-info">
+    {{#each accounts as |account|}}
+    {{#if account.is_checking}}
+    <div class="card" id="checking" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Checking Account</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Account ID: {{account.account_id}}</h6>
+        <p class="card-text">Current Balance: {{account.acc_balance}}</p>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="account-info">
+    {{#if account.is_savings}}
+    <div class="card" id='savings' style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Savings Account</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Account ID: {{account.account_id}}</h6>
+        <p class="card-text">Current Balance: {{account.acc_balance}}</p>
+      </div>
+    </div>
+    {{/if}}
+    {{/each}}
+  </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+  Add Account
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Account</h5>
+      </div>
+      <form class ='create-account'>
+        <div class="modal-body">
+          <label for="">Initial Deposit: </label>
+          <input id='deposit' type="text"></input>
+          <label for="">Checking: </label>
+          <input id='isChecking' type="checkbox"></input>
+          <label for="">Savings: </label>
+          <input id='isSavings' type="checkbox"></input>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="create-account" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="/js/account.js"></script>
